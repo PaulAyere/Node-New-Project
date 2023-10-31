@@ -1,7 +1,15 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
-const User = require('../models/userModel');
+const User = require('../models/userModels');
+
+
+// require('dotenv').config();
+
+// const JWT_SECRET = 'penta440';
+
+
+
 
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -68,6 +76,15 @@ const loginUser = asyncHandler(async (req, res) => {
 const getMyProfile = asyncHandler(async (req, res) => {
     res.status(200).json(req.user);
   });
+
+  // Generate JWT
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: '30d',
+  })
+}
+// console.log('JWT_SECRET:', process.env.JWT_SECRET);
+
   
   module.exports = {
     registerUser,

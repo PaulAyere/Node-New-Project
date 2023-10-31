@@ -4,7 +4,7 @@ const colors = require('colors');
 const dotenv = require('dotenv').config();
 const { errorHandler } = require('./middlewares/errorHandler');
 const connectDB = require('./config/config');
-const cors = require('cors');
+// const cors = require('cors');
 
 const port = process.env.PORT || 8080;
 
@@ -20,11 +20,11 @@ app.use(express.urlencoded({ extended: false }));
 //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 // };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 // Define your routes here
-app.use('/api/users', require('./routes/userRoutes')); // User routes
-app.use('/api/jobs', require('./routes/jobRoutes')); // Job routes (assuming you have a job route)
+app.use('/api/users', require('./routes/userRouter')); // User routes
+app.use('/api/jobs', require('./routes/jobRouter')); // Job routes (assuming you have a job route)
 
 // Serve frontend (if applicable)
 // if (process.env.NODE_ENV === 'production') {
