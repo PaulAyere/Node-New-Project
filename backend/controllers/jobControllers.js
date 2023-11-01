@@ -66,9 +66,15 @@ const deleteJob = asyncHandler(async (req, res) => {
     throw new Error('User not authorized');
   }
 
-  await job.remove();
+  // Use deleteOne or findOneAndRemove to delete the job
+  const deletedJob = await Job.deleteOne({ _id: req.params.id });
 
-  res.status(200).json({ id: req.params.id });
+  if (deletedJob.deletedCount === 1) {
+    res.status(200).json({ id: req.params.id });
+  } else {
+    res.status(500); // Change to 500 for "Internal Server Error"
+    throw new Error('Error while deleting the job');
+  }
 });
 
 module.exports = {
