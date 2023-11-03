@@ -4,14 +4,6 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModels');
 
 
-// require('dotenv').config();
-
-// const JWT_SECRET = 'penta440';
-
-
-
-
-
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -80,11 +72,9 @@ const getMyProfile = asyncHandler(async (req, res) => {
   // Generate JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '30d',
+    expiresIn: '2d',
   })
 }
-// console.log('JWT_SECRET:', process.env.JWT_SECRET);
-
   
   module.exports = {
     registerUser,

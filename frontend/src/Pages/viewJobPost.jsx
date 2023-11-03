@@ -25,17 +25,21 @@ function ViewJobList() {
 
   return (
     <div className="mt-10">
-      <h2 className="text-2xl text-center mb-4">Available Jobs</h2>
-      {jobs.map((job) => (
-        <div key={job._id} className="bg-white shadow-md rounded p-4 mb-4">
-          <h3 className="text-xl mb-2">{job.title}</h3>
-          <p>Description: {job.description}</p>
-          <p>Company: {job.company}</p>
-          <p>Location: {job.location}</p>
-          <p>payPerHour: ${job.payPerHour}</p>
-          <p>hoursNeeded: {job.hoursNeeded}</p>
-        </div>
-      ))}
+      <h2 className="text-4xl text-center mb-4">Available Jobs</h2>
+      <div className="flex flex-wrap -mx-4">
+        {jobs.map((job) => (
+          <div key={job._id} className="w-1/3 px-4 mb-4">
+            <div className="bg-white rounded-lg border border-gray-300 shadow-md p-4">
+              <h3 className="text-xl mb-2 font-bold">{job.title}</h3>
+              <p>Description: {job.description}</p>
+              <p>Company: {job.company}</p>
+              <p>Location: {job.location}</p>
+              <p>Pay Per Hour: ${job.payPerHour}</p>
+              <p>Hours Needed: {job.hoursNeeded} hours per week</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
