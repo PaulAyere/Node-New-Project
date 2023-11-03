@@ -1,10 +1,10 @@
-// const path = require('path');
+const path = require('path');
 const express = require('express');
 const colors = require('colors');
 const dotenv = require('dotenv').config();
 const { errorHandler } = require('./middlewares/errorHandler');
 const connectDB = require('./config/config');
-// const cors = require('cors');
+const cors = require('cors');
 
 const port = process.env.PORT || 8080;
 
@@ -15,12 +15,18 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// const corsOptions = {
-//   origin: 'http://localhost:3000', // Replace with the actual URL of your frontend
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-// };
+const allowedOrigins = ['http://localhost:3000'];
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // Define your routes here
 app.use('/api/users', require('./routes/userRouter')); // User routes

@@ -3,7 +3,7 @@ const Job = require('../models/jobModels');
 
 
 const getJobs = asyncHandler(async (req, res) => {
-  const jobs = await Job.find({ user: req.user.id });
+  const jobs = await Job.find();
   res.status(200).json(jobs);
 });
 

@@ -9,7 +9,7 @@ const {
 
 const { protect } = require('../middlewares/userAuth');
 
-router.route('/').get(protect, getJobs).post(protect, createJob);
+router.route('/').get( getJobs).post( protect, createJob);
 router.route('/:id').delete(protect, deleteJob).put(protect, updateJob);
 
 module.exports = router;
